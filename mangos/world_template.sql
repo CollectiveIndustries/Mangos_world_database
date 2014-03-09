@@ -21,9 +21,9 @@ CREATE TABLE IF NOT EXISTS `world_template` (
 -- Dumping data for table mangos-Serenity.world_template: 5 rows
 /*!40000 ALTER TABLE `world_template` DISABLE KEYS */;
 REPLACE INTO `world_template` (`map`, `ScriptName`) VALUES
+	(530, 'world_map_outland'),
 	(1, 'world_map_kalimdor'),
 	(0, 'world_map_eastern_kingdoms'),
-	(530, 'world_map_outland'),
 	(571, 'world_map_northrend'),
 	(609, 'world_map_ebon_hold');
 /*!40000 ALTER TABLE `world_template` ENABLE KEYS */;
