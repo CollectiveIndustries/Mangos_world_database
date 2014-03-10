@@ -107,6 +107,12 @@ SCRDEV2_DATABASE = raw_input('New ScriptDev2 Database: [scriptdev2-' + CI_IN_REA
 if SCRDEV2_DATABASE == '':
 	SCRDEV2_DATABASE = 'scriptdev2-'+CI_IN_REALM_NAME
 
+        # ScriptDev2
+ACC_DATABASE = raw_input('New Account Database: [realmd-account] ')
+if ACC_DATABASE == '':
+        ACC_DATABASE = 'realmd-account'
+
+
 #install WORLD DB
 full_db = glob.glob('mangos/*.sql')
 full_db = sorted(full_db)
