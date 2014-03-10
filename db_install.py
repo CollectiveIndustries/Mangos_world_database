@@ -107,12 +107,64 @@ SCRDEV2_DATABASE = raw_input('New ScriptDev2 Database: [scriptdev2-' + CI_IN_REA
 if SCRDEV2_DATABASE == '':
 	SCRDEV2_DATABASE = 'scriptdev2-'+CI_IN_REALM_NAME
 
-        # ScriptDev2
+        # Account Database
 ACC_DATABASE = raw_input('New Account Database: [realmd-account] ')
 if ACC_DATABASE == '':
         ACC_DATABASE = 'realmd-account'
 
 
+#------------------------------------------ DataBase Strings
+mangos_ci_sql_inst = open('./mangos-ci-usr.sq1','w')#open a temporary file for writing our config we will switch to root and move it later
+
+### TODO change all DB strings to DROP IF EXIST then CREATE
+
+#CREATE DATABASE `mangos` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+ADD_MANGOS_MYSQL = ('CREATE DATABASE `' + WORLD_DATABASE + '` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;\n\n')
+mangos_ci_sql_inst.write(ADD_MANGOS_MYSQL)
+
+#CREATE DATABASE `characters` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+ADD_MANGOS_MYSQL = ('CREATE DATABASE `' + CHAR_DATABASE + '` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;\n\n')
+mangos_ci_sql_inst.write(ADD_MANGOS_MYSQL)
+
+#CREATE DATABASE `realmd` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+ADD_MANGOS_MYSQL = ('CREATE DATABASE `' + ACC_DATABASE + '` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;\n\n')
+mangos_ci_sql_inst.write(ADD_MANGOS_MYSQL)
+
+#CREATE DATABASE `scriptdev2` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+ADD_MANGOS_MYSQL = ('CREATE DATABASE `' + SCRDEV2_DATABASE + '` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;\n\n')
+mangos_ci_sql_inst.write(ADD_MANGOS_MYSQL)
+
+#CREATE USER 'mangos'@'localhost' IDENTIFIED BY 'mangos';
+ADD_MANGOS_MYSQL = ('CREATE USER '+ CI_MANGOS_USR + '@localhost ' + 'IDENTIFIED BY ' + CI_MANGOS_USR_PASS+';\n\n')
+mangos_ci_sql_inst.write(ADD_MANGOS_MYSQL)
+
+#GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, LOCK TABLES ON `mangos`.* TO 'mangos'@'localhost';
+ADD_MANGOS_MYSQL = ('GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, LOCK TABLES ON `'+WORLD_DATABASE+'`.* TO '+ CI_MANGOS_USR + '@localhost;\n\n')
+mangos_ci_sql_inst.write(ADD_MANGOS_MYSQL)
+
+#GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, LOCK TABLES ON `characters`.* TO 'mangos'@'localhost';
+ADD_MANGOS_MYSQL = ('GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, LOCK TABLES ON `'+CHAR_DATABASE+'`.* TO '+ CI_MANGOS_USR + '@localhost;\n\n')
+mangos_ci_sql_inst.write(ADD_MANGOS_MYSQL)
+
+#GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, LOCK TABLES ON `realmd`.* TO 'mangos'@'localhost';
+ADD_MANGOS_MYSQL = ('GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, LOCK TABLES ON `'+ACC_DATABASE+'`.* TO '+ CI_MANGOS_USR + '@localhost;\n\n')
+mangos_ci_sql_inst.write(ADD_MANGOS_MYSQL)
+
+#GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, LOCK TABLES ON `realmd`.* TO 'mangos'@'localhost';
+ADD_MANGOS_MYSQL = ('GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, LOCK TABLES ON `'+SCRDEV2_DATABASE+'`.* TO '+ CI_MANGOS_USR + '@localhost;\n\n')
+mangos_ci_sql_inst.write(ADD_MANGOS_MYSQL)
+
+#set up realm-list and with user input
+#INSERT INTO `realmlist` VALUES ('MaNGOS', '127.0.0.1', 8085, 0, 2, 0, 0, 0, '');
+
+#TODO setup User input Section + loop for manual install of realms to account server
+
+#finalize the SQL file
+mangos_ci_sql_inst.close()
+print "SQL file for MaNGOS DB install has been written to your home directory: ["+'./mangos-ci-usr.sq1'+"]"
+
+mysql_call(mysql_root_ci_usr, mysql_root_ci_pass, 'localhost', " ", "./mangos-ci-usr.sq1" )#no host config set up yet
+		
 #install WORLD DB
 full_db = glob.glob('mangos/*.sql')
 full_db = sorted(full_db)
