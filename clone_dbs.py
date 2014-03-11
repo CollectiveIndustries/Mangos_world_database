@@ -121,6 +121,5 @@ def main()
 	print "CLONING DONE"
 	logo()
 
-
 # Enter Main program here
 main()
