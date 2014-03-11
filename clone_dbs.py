@@ -18,16 +18,16 @@ import os.path
 import glob
 
 # Collective Industries mysql call
-def mysql_load(usr, psw, host, db, sql):
+def mysql_load(usr, psw, host, port, sql):#DataBases will be auto created on import
         """Function for Adding sql files to MySQL Host"""
-        os.system("mysql -u " + usr + " -p" + psw + " -h " + host + ' ' + db + "  < " + sql )
+        os.system("mysql --user="+usr+" --password="+psw+" --host="+host+' --port='+port+"  < "+sql )
 
 # mysql_call()
 
 # mysql_dump()
-def mysql_dump(usr, psw, host, db, sql)
+def mysql_dump(usr, psw, host, port, db, sql):
 	"""Function for dumping databases from MySQL"""
-	os.system("mysqldump --user"+usr+"--password"+psw+" --host "+host+" "+db+" > "+db+".sql")
+	os.system("mysqldump --user="+usr+" --password="+psw+" --host="+host+" --port="+port+' '+db+" > "+sql+".sql")
 # CI MANGOS LOGO HERE
 # Idea by Levi Modl
 # adapted to work with Python by Andrew Malone
@@ -58,7 +58,7 @@ def logo():
 	print ""
 # END LOGO
 
-def main()
+def main():
 	logo()
 	# Realm name
 	CI_REALM_NAME = subprocess.check_output(["uname", "-n"])
@@ -81,7 +81,7 @@ def main()
 	CI_HOST_DB_PORT = raw_input('Port number for MySQL Server on HOST-DB (' + CI_HOST_DB + '): [3306] ')
 	if CI_HOST_DB_PORT == '':
 		CI_HOST_DB_PORT = '3306'
-	CI_CLONE_DB_PORT = raw_input('Port number for MySQL Server on HOST-DB (' + CI_HOST_DB + '): [3306] ')
+	CI_CLONE_DB_PORT = raw_input('Port number for MySQL Server on CLONE-DB (' + CI_CLONE_DB + '): [3306] ')
 	if CI_CLONE_DB_PORT == '':
 		CI_CLONE_DB_PORT = '3306'
 	#USR and password for NEW MANGOS USER
@@ -93,31 +93,31 @@ def main()
 	print "Almost Ready to clone "+CI_HOST_DB+" ---> "+CI_CLONE_DB
 
 	# WORLD DB Questions
-	WORLD_DATABASE = raw_input('New World Database name: [mangos-' + CI_IN_REALM_NAME + '] ')
+	WORLD_DATABASE = raw_input('World Database name: [mangos-' + CI_IN_REALM_NAME + '] ')
 	if WORLD_DATABASE == '':
 		WORLD_DATABASE = 'mangos-'+CI_IN_REALM_NAME
 
 	# CHAR db questions
-	CHAR_DATABASE = raw_input('New Character Database: [characters-' + CI_IN_REALM_NAME + '] ')
+	CHAR_DATABASE = raw_input('Character Database: [characters-' + CI_IN_REALM_NAME + '] ')
 	if CHAR_DATABASE == '':
 		CHAR_DATABASE = 'characters-'+CI_IN_REALM_NAME
 
 	# ScriptDev2	
-	SCRDEV2_DATABASE = raw_input('New ScriptDev2 Database: [scriptdev2-' + CI_IN_REALM_NAME + '] ')
+	SCRDEV2_DATABASE = raw_input('ScriptDev2 Database: [scriptdev2-' + CI_IN_REALM_NAME + '] ')
 	if SCRDEV2_DATABASE == '':
 		SCRDEV2_DATABASE = 'scriptdev2-'+CI_IN_REALM_NAME
 	
 	print "Starting the clone process"
-	mysql_dump(CI_CLONE_USR, CI_CLONE_USR_PASS, CI_HOST_DB, CI_HOST_DB_PORT, WORLD_DATABASE, "mangos-"+CI_IN_REALM_NAME)
-	mysql_load(CI_CLONE_USR, CI_CLONE_USR_PASS, CI_HOST_DB, CI_HOST_DB_PORT, WORLD_DATABASE, "mangos-"+CI_IN_REALM_NAME)
+	mysql_dump(CI_HOST_USR, CI_HOST_USR_PASS, CI_HOST_DB, CI_HOST_DB_PORT, WORLD_DATABASE, "mangos-"+CI_IN_REALM_NAME)
+	mysql_load(CI_CLONE_USR, CI_CLONE_USR_PASS, CI_CLONE_DB, CI_CLONE_DB_PORT, "mangos-"+CI_IN_REALM_NAME+".sql")
 	print "World DB has been cloned"
 	print "Now cloning Characters"
-	mysql_dump(CI_CLONE_USR, CI_CLONE_USR_PASS, CI_HOST_DB, CI_HOST_DB_PORT, CHAR_DATABASE, "characters-"+CI_IN_REALM_NAME)
-	mysql_load(CI_CLONE_USR, CI_CLONE_USR_PASS, CI_HOST_DB, CI_HOST_DB_PORT, CHAR_DATABASE, "characters-"+CI_IN_REALM_NAME)
+	mysql_dump(CI_HOST_USR, CI_HOST_USR_PASS, CI_HOST_DB, CI_HOST_DB_PORT, CHAR_DATABASE, "characters-"+CI_IN_REALM_NAME)
+	mysql_load(CI_CLONE_USR, CI_CLONE_USR_PASS, CI_CLONE_DB, CI_CLONE_DB_PORT, "characters-"+CI_IN_REALM_NAME+".sql")
 	print "cloning complete"
 	print "cloning ScriptDev2"
-	mysql_dump(CI_CLONE_USR, CI_CLONE_USR_PASS, CI_HOST_DB, CI_HOST_DB_PORT, SCRDEV2_DATABASE, "scriptdev2-"+CI_IN_REALM_NAME)
-	mysql_load(CI_CLONE_USR, CI_CLONE_USR_PASS, CI_HOST_DB, CI_HOST_DB_PORT, SCRDEV2_DATABASE, "scriptdev2-"+CI_IN_REALM_NAME)
+	mysql_dump(CI_HOST_USR, CI_HOST_USR_PASS, CI_HOST_DB, CI_HOST_DB_PORT, SCRDEV2_DATABASE, "scriptdev2-"+CI_IN_REALM_NAME)
+	mysql_load(CI_CLONE_USR, CI_CLONE_USR_PASS, CI_CLONE_DB, CI_CLONE_DB_PORT, "scriptdev2-"+CI_IN_REALM_NAME+".sql")
 	print "CLONING DONE"
 	logo()
 
