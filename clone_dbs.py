@@ -120,3 +120,7 @@ def main()
 	mysql_load(CI_CLONE_USR, CI_CLONE_USR_PASS, CI_HOST_DB, CI_HOST_DB_PORT, SCRDEV2_DATABASE, "scriptdev2-"+CI_IN_REALM_NAME)
 	print "CLONING DONE"
 	logo()
+
+
+# Enter Main program here
+main()
