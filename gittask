@@ -63,7 +63,7 @@ define_tag()
 git status >/dev/null 2>&1 || { echo "Error: You're not in a git repository."; exit 1; }
 
 # If "new", confirm that the required arguments were provided.
-if [ "$1" == "new" ] && [ -n "$2" ] && [ -n "$3" ]; then
+if  "$1" == "new" && -n "$2" && -n "$3" ; then
 
     # Validate $3, only allow a-z (lower case), 0-9 and _ (underscore) in branch names.
     [ "${3//[0-9a-z_]/}" = "" ] || { echo "Error: Branch names may only consist of a-z, 0-9 and underscore."; exit 1; }
@@ -90,7 +90,7 @@ if [ "$1" == "new" ] && [ -n "$2" ] && [ -n "$3" ]; then
     esac
 
 # If "done", proceed to determine current branch and by that what to do next.
-elif [ "$1" == "done" ]; then
+elif "$1" == "done" ; then
     current=`git branch | awk '/\*/{print $2}'`
     case ${current} in
         feature* )
