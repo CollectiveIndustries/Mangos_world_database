@@ -4,17 +4,17 @@ void usage(void)
 {
     printf("\n");
     printf("Usage:\n");
-    echo "  gittask.sh new feature name_of_feature"
-    echo "    - Creates a new branch off from 'development' named"
-    echo "      'feature/name_of_feature'."
-    echo "  gittask.sh new release name_of_release"
-    echo "    - Creates a new branch off from 'development' named"
-    echo "      'release/name_of_release'."
-    echo "  gittask.sh new hotfix name_of_hotfix"
-    echo "    - Creates a new branch off from 'master' named"
-    echo "      'hotfix/name_of_hotfix'."
-    echo "  gittask.sh done"
-    echo "    - Merges current branch into master and/or development"
-    echo "      depending on if it's a feature, release or hotfix."
+    printf("  gittask.sh new feature name_of_feature\n");
+    printf("    - Creates a new branch off from 'development' named\n");
+    printf("      'feature/name_of_feature'.\n");
+    printf("  gittask.sh new release name_of_release\n");
+    printf("    - Creates a new branch off from 'development' named\n");
+    printf("      'release/name_of_release'.\n");
+    printf("  gittask.sh new hotfix name_of_hotfix\n");
+    printf("    - Creates a new branch off from 'master' named\n");
+    printf("      'hotfix/name_of_hotfix'.\n");
+    printf("  gittask.sh done\n");
+    printf("    - Merges current branch into master and/or development\n");
+    printf("      depending on if it's a feature, release or hotfix.\n");
 }
 #endif
