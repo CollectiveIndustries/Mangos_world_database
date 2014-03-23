@@ -10,7 +10,7 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
--- Dumping structure for table mangos-account.uptime
+-- Dumping structure for table realmd-account.uptime
 CREATE TABLE IF NOT EXISTS `uptime` (
   `realmid` int(11) unsigned NOT NULL,
   `starttime` bigint(20) unsigned NOT NULL DEFAULT '0',
@@ -20,8 +20,10 @@ CREATE TABLE IF NOT EXISTS `uptime` (
   PRIMARY KEY (`realmid`,`starttime`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='Uptime system';
 
--- Dumping data for table mangos-account.uptime: 0 rows
+-- Dumping data for table realmd-account.uptime: 1 rows
 /*!40000 ALTER TABLE `uptime` DISABLE KEYS */;
+REPLACE INTO `uptime` (`realmid`, `starttime`, `startstring`, `uptime`, `maxplayers`) VALUES
+	(2, 1395554945, '2014-03-23 01:09:05', 0, 0);
 /*!40000 ALTER TABLE `uptime` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;

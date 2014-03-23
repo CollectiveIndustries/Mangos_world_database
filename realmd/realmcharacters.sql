@@ -10,7 +10,7 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
--- Dumping structure for table mangos-account.realmcharacters
+-- Dumping structure for table realmd-account.realmcharacters
 CREATE TABLE IF NOT EXISTS `realmcharacters` (
   `realmid` int(11) unsigned NOT NULL DEFAULT '0',
   `acctid` bigint(20) unsigned NOT NULL,
@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS `realmcharacters` (
   KEY `acctid` (`acctid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='Realm Character Tracker';
 
--- Dumping data for table mangos-account.realmcharacters: 0 rows
+-- Dumping data for table realmd-account.realmcharacters: 0 rows
 /*!40000 ALTER TABLE `realmcharacters` DISABLE KEYS */;
 /*!40000 ALTER TABLE `realmcharacters` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

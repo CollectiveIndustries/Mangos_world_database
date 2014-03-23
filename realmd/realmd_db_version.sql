@@ -10,12 +10,12 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
--- Dumping structure for table mangos-account.realmd_db_version
+-- Dumping structure for table realmd-account.realmd_db_version
 CREATE TABLE IF NOT EXISTS `realmd_db_version` (
   `required_c12484_02_realmd_account_access` bit(1) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='Last applied sql update to DB';
 
--- Dumping data for table mangos-account.realmd_db_version: 1 rows
+-- Dumping data for table realmd-account.realmd_db_version: 1 rows
 /*!40000 ALTER TABLE `realmd_db_version` DISABLE KEYS */;
 REPLACE INTO `realmd_db_version` (`required_c12484_02_realmd_account_access`) VALUES
 	(NULL);

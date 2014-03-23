@@ -10,7 +10,7 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
--- Dumping structure for table mangos-account.realmlist
+-- Dumping structure for table realmd-account.realmlist
 CREATE TABLE IF NOT EXISTS `realmlist` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL DEFAULT '',
@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `realmlist` (
   UNIQUE KEY `idx_name` (`name`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='Realm System';
 
--- Dumping data for table mangos-account.realmlist: 1 rows
+-- Dumping data for table realmd-account.realmlist: 1 rows
 /*!40000 ALTER TABLE `realmlist` DISABLE KEYS */;
 REPLACE INTO `realmlist` (`id`, `name`, `address`, `port`, `icon`, `realmflags`, `timezone`, `allowedSecurityLevel`, `population`, `realmbuilds`) VALUES
 	(1, 'MaNGOS', '127.0.0.1', 8085, 0, 2, 0, 0, 0, '');
